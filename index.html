@@ -8,15 +8,55 @@
   </head>
 
   <body>
-    <button id="start-button" class="button">Начать</button>
-    <div id="popup" class="hidden popup">
-      <div>
-        <p>popup Inside</p>
+    <div class="container">
+      <div><button id="start-button" class="button">Начать</button></div>
+      <div id="popup" class="hidden popup">
+        <div class="header">
+          <p>Заголовок</p>
+        </div>
+        <div>
+          <div class="RowParent">
+            <div class="firstRow">
+              <input
+                type="text"
+                id="firstName"
+                class="input"
+                placeholder="Firstname"
+              />
+              <input
+                type="text"
+                id="lastName"
+                class="input"
+                placeholder="Lastname"
+              />
+              <input
+                type="text"
+                id="surName"
+                class="input"
+                placeholder="Surname"
+              />
+            </div>
+            <div class="secondRow">
+              <input type="text" id="age" class="input" placeholder="Age" />
+              <input
+                type="text"
+                id="companyName"
+                class="input"
+                placeholder="Company Name"
+              />
+            </div>
+          </div>
+          <button @onclick="addUser()" id="sendData" class="button">
+            Отправить данные
+          </button>
+        </div>
       </div>
-      <div>Another div</div>
-      <button id="sendData" class="button">Отправить данные</button>
+      <div id="user-container" class="non-popup">
+        <div class="header">
+          <p>Данные</p>
+        </div>
+      </div>
     </div>
-
     <script src="main.js"></script>
   </body>
 </html>

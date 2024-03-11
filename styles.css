@@ -3,19 +3,61 @@
   padding: 5px 20px;
   display: block;
 }
+.input {
+  margin: 15px;
+  padding: 5px 5px;
+  display: block;
+}
 .hidden {
   display: none;
 }
 
-.popup {
-  position: fixed;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 500px;
-  /* разобраться с шириной */
-  outline: 2px solid black;
+.IsBlackBackground {
+  background-color: black;
+  opacity: 0.3;
 }
+.IsWhiteBackground {
+  background-color: white;
+  opacity: 1;
+}
+.RowParent {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.popup {
+  text-align: center;
+  /* width: 500px; */
+  width: 100%;
+  /* margin: 0 auto; */
+  /* outline: 2px solid black; */
+  border: 5px solid white;
+  border-radius: 15px;
+  background-color: white;
+}
+.non-popup {
+  text-align: center;
+  width: 100%;
+  border: 5px solid black;
+  border-radius: 15px;
+  background-color: white;
+}
+/* .popupBorderColorIsBlack {
+  border: 5px solid black;
+}
+.popupBorderColorIsWhite {
+  border: 5px solid white;
+} */
+
 /* start-button и popup можно расположить вообще в одном блоке? */
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+body {
+  font-family: Arial;
+}
