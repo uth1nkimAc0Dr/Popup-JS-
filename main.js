@@ -1,81 +1,56 @@
-let users = new Array();
-let count = 0;
+let users = [];
 
-function openForm() {
-  alert("Hello");
-}
-const startButton = document.getElementById("start-button");
-const popup = document.getElementById("popup");
-const userContainer = document.getElementById("user-container");
-const sendData = document.getElementById("sendData");
-
+const userContainer = document.querySelector("#user-container");
+const popup = document.querySelector("#popup");
+const startButton = document.querySelector("#popup-form__start-button");
+const bg = document.querySelector(".bg");
+// placeholder style Отдельно поменять потом шрифты внутри input
 startButton.addEventListener("click", () => {
-  popup.classList.remove("hidden");
-  userContainer.classList.add("hidden");
-  startButton.classList.add("hidden");
-  // document.body.classList.add("IsBlackBackground");
-  // document.body.classList.remove("IsWhiteBackground");
-  document.body.style.backgroundColor = "black";
-  // popup.classList.add("popupBorderColorIsWhite");
-  // popup.classList.remove("popupBorderColoIsBlack");
+  toggleClassVisibility(true, popup);
+  bg.classList.add("bg_open");
+  toggleClassVisibility(false, userContainer);
+  toggleClassVisibility(false, startButton);
 });
 
-sendData.addEventListener("click", () => {
-  console.log("users.length is");
-  console.log(users.length);
-  alert("Ваши данные отправлены");
-  popup.classList.add("hidden");
-  userContainer.classList.remove("hidden");
-  document.body.style.backgroundColor = "white";
-  startButton.classList.remove("hidden");
-  // let inputFirstName = document.getElementById("firstname");
-  // let inputLastName = document.getElementById("lastname");
-  // users.firstName = inputFirstName;
-  const newUser = { id: users.length };
-  newUser.firstName = document.getElementById("firstName").value;
-  newUser.lastName = document.getElementById("lastName").value;
-  newUser.surName = document.getElementById("surName").value;
-  newUser.age = document.getElementById("age").value;
-  newUser.companyName = document.getElementById("companyName").value;
-  users.push(newUser);
-  // без this.user?
-
-  console.log("___________");
-
-  console.log("FULL:");
-  for (let i = 0; i < users.length; i++) {
-    console.log("Пользователь №" + users[i].id);
-    console.log("users[i].firstName is " + users[i].firstName);
-    console.log("users[i].lastName is " + users[i].lastName);
-    console.log("users[i].surName is " + users[i].surName);
-    console.log("users[i].age is " + users[i].age);
-    console.log("users[i].companyName is " + users[i].companyName);
+function toggleClassVisibility(isVisible, className) {
+  if (isVisible) {
+    className.classList.remove("hidden");
+  } else {
+    className.classList.add("hidden");
   }
-  console.log("____________________");
-  document.getElementById("firstName").value = null;
-  document.getElementById("lastName").value = null;
-  document.getElementById("surName").value = null;
-  document.getElementById("age").value = null;
-  document.getElementById("companyName").value = null;
-  // когда заново открываешь, надо сделать так, чтобы все удалялось
-  //
-  // for (let i = 0; i < count; i++) {
-  //   for (let key in user) {
-  //     // console.log("this is value?", user[key]);
-  //     console.log("user[key] is" + user.i.key);
-  //     // alert("свойство:" + user[key]);
-  //   }
-  // }
-  // count = count + 1;
-  // почистить поля
-  // users.forEach((user) => {
-  const userElement = document.createElement("div");
-  // userElement.textContent = users[users.length - 1].firstName;
-  let id = users.length - 1;
-  userElement.textContent = `${users[id].firstName} ${users[id].lastName}`;
-  // хочу вывести данные нового пользователя
-  userContainer.appendChild(userElement);
-  // });
+}
+
+// нажатие кнопки Отправить
+document.querySelector("#sendData").addEventListener("click", () => {
+  const inputs = document.querySelectorAll(".popup__input");
+  const allFilled = Array.from(inputs).every(
+    (input) => input.value.trim() !== ""
+  );
+  if (!allFilled) {
+    alert("Заполните все поля");
+    return;
+  }
+
+  toggleClassVisibility(false, popup);
+  toggleClassVisibility(true, userContainer);
+  toggleClassVisibility(true, startButton);
+  bg.classList.remove("bg_open");
+  alert("Данные пользователя отправлены");
+  const newUser = { id: users.length };
+  newUser.firstName = document.querySelector("#firstName").value;
+  newUser.lastName = document.querySelector("#lastName").value;
+  newUser.surName = document.querySelector("#surName").value;
+  newUser.age = document.querySelector("#age").value;
+  newUser.companyName = document.querySelector("#companyName").value;
+  users.push(newUser);
+  document.querySelector("#firstName").value = null;
+  document.querySelector("#lastName").value = null;
+  document.querySelector("#surName").value = null;
+  document.querySelector("#age").value = null;
+  document.querySelector("#companyName").value = null;
+  const userElement = document.querySelector(".user-container__content");
+  let json = JSON.stringify(users);
+  userElement.textContent = `${json}`;
 });
 
 document.addEventListener("click", (event) => {
@@ -83,20 +58,25 @@ document.addEventListener("click", (event) => {
     !popup.contains(event.target) &&
     !startButton.contains(event.target) &&
     !popup.classList.contains("hidden")
+    // если это не попап && не Start && попап видно
   ) {
-    popup.classList.add("hidden");
-    userContainer.classList.remove("hidden");
-    // document.body.classList.remove("IsBlackBackground");
-    // document.body.classList.add("IsWhiteBackground");
-    document.body.style.backgroundColor = "white";
-    // popup.classList.remove("popupBorderColorIsWhite");
-    // popup.classList.add("popupBorderColoIsBlack");
-    startButton.classList.remove("hidden");
+    toggleClassVisibility(false, popup);
+    // toggleBodyBackground(false);
+    toggleClassVisibility(true, userContainer);
+    toggleClassVisibility(true, startButton);
+    bg.classList.remove("bg_open");
   }
 });
 
-// alert("щас должно скрыться, классы попапа");
-// alert(popup.classList);
-// console.log(popup.classList);
+// document.addEventListener("DOMContentLoaded", adjustPopupBoxFlexDirection);
+// window.addEventListener("resize", adjustPopupBoxFlexDirection);
 
-function addUser() {}
+// function adjustPopupBoxFlexDirection() {
+//   const popupForm = document.querySelector(".popup-form");
+//   const popupBox = document.querySelector(".popup__box");
+//   if (popupForm.offsetWidth < 450) {
+//     popupBox.style.flexDirection = "row";
+//   } else {
+//     popupBox.style.flexDirection = "column";
+//   }
+// }

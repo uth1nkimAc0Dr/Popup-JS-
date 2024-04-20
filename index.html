@@ -2,58 +2,71 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <link rel="stylesheet" href="styles.css" />
     <title>Popup</title>
   </head>
 
   <body>
-    <div class="container">
-      <div><button id="start-button" class="button">Начать</button></div>
-      <div id="popup" class="hidden popup">
-        <div class="header">
-          <p>Заголовок</p>
-        </div>
-        <div>
-          <div class="RowParent">
-            <div class="firstRow">
-              <input
-                type="text"
-                id="firstName"
-                class="input"
-                placeholder="Firstname"
-              />
-              <input
-                type="text"
-                id="lastName"
-                class="input"
-                placeholder="Lastname"
-              />
-              <input
-                type="text"
-                id="surName"
-                class="input"
-                placeholder="Surname"
-              />
-            </div>
-            <div class="secondRow">
-              <input type="text" id="age" class="input" placeholder="Age" />
-              <input
-                type="text"
-                id="companyName"
-                class="input"
-                placeholder="Company Name"
-              />
-            </div>
+    <div class="popup-form">
+      <div>
+        <button id="popup-form__start-button" class="popup-form__start-button">
+          Начать
+        </button>
+      </div>
+      <div id="popup" class="popup hidden">
+        <!-- :class="{'hidden': isPopupOpen}" динамич. классы на переменных завязаны -->
+        <div class="popup__header">Привет! Заполните форму!</div>
+        <div class="popup__box">
+          <div class="popup__col">
+            <input
+              type="text"
+              id="firstName"
+              class="popup__input"
+              placeholder="Firstname"
+            />
+            <input
+              type="text"
+              f
+              id="lastName"
+              class="popup__input"
+              placeholder="Lastname"
+            />
+            <input
+              type="text"
+              id="surName"
+              class="popup__input"
+              placeholder="Surname"
+            />
           </div>
-          <button @onclick="addUser()" id="sendData" class="button">
+          <div class="popup__col">
+            <input
+              type="text"
+              id="age"
+              class="popup__input"
+              placeholder="Age"
+            />
+            <input
+              type="text"
+              id="companyName"
+              class="popup__input"
+              placeholder="Company Name"
+            />
+          </div>
+          <button id="sendData" class="popup__submit-button">
             Отправить данные
           </button>
         </div>
       </div>
-      <div id="user-container" class="non-popup">
-        <div class="header">
-          <p>Данные</p>
+
+      <div class="bg"></div>
+
+      <div id="user-container" class="user-container">
+        <div class="user-container__header">
+          <div>Данные</div>
+        </div>
+        <div class="user-container__content">
+          Данных пока нет. Заполните форму и отправьте данные.
+          <!-- здесь далее будет выводиться информация -->
         </div>
       </div>
     </div>
